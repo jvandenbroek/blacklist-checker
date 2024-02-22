@@ -1,9 +1,10 @@
 package blacklist_checker
 
 import (
-	"github.com/ilijamt/blacklist_checker/internal/utils"
 	"io/ioutil"
 	"strings"
+
+	"github.com/ilijamt/blacklist_checker/internal/utils"
 )
 
 var dnsbls = []string{
@@ -15,12 +16,10 @@ var dnsbls = []string{
 	"cbl.abuseat.org",
 	"cbl.anti-spam.org.cn",
 	"cdl.anti-spam.org.cn",
-	"combined.njabl.org",
 	"csi.cloudmark.com",
 	"db.wpbl.info",
 	"dnsbl.dronebl.org",
 	"dnsbl.inps.de",
-	"dnsbl.njabl.org",
 	"dnsbl.sorbs.net",
 	"drone.abuse.ch",
 	"dsn.rfc-ignorant.org",
@@ -63,6 +62,7 @@ var dnsbls = []string{
 	"xbl.spamhaus.org",
 	"zen.spamhaus.org",
 	"zombie.dnsbl.sorbs.net",
+	"hostkarma.junkemailfilter.com",
 }
 
 func GetDNSBLs(file string) ([]string, error) {

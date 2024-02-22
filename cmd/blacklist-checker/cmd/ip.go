@@ -3,6 +3,10 @@ package cmd
 import (
 	"context"
 	"fmt"
+	"net"
+	"os"
+	"sync/atomic"
+
 	"github.com/ilijamt/blacklist_checker"
 	"github.com/ilijamt/blacklist_checker/internal/check"
 	"github.com/ilijamt/blacklist_checker/internal/utils"
@@ -10,8 +14,6 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"golang.org/x/sync/semaphore"
-	"net"
-	"sync/atomic"
 )
 
 var ipCmd = &cobra.Command{
@@ -65,6 +67,9 @@ var ipCmd = &cobra.Command{
 		}
 
 		log.Info().Uint64("blacklisted", blacklisted).Int("queries", len(items)).Msg("Finished")
+		if blacklisted > 0 {
+			os.Exit(1)
+		}
 		return err
 	},
 }

@@ -1,10 +1,11 @@
 package main
 
 import (
+	"os"
+
 	"github.com/ilijamt/blacklist_checker/cmd/blacklist-checker/cmd"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"os"
 )
 
 func main() {

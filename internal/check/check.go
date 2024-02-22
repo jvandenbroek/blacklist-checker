@@ -2,9 +2,10 @@ package check
 
 import (
 	"fmt"
+	"net"
+
 	"github.com/miekg/dns"
 	"golang.org/x/sync/semaphore"
-	"net"
 )
 
 type Item struct {
@@ -39,6 +40,17 @@ func Check(sem *semaphore.Weighted, item Item, nameserver string) (blacklisted b
 	}
 
 	if len(r.Answer) > 0 {
+		for _, a := range r.Answer {
+			switch a.(type) {
+			case *dns.A:
+				if a.(*dns.A).A.String() == "127.0.0.1" {
+					return blacklisted, responses, err
+				}
+				if a.(*dns.A).A.String() == "127.0.0.5" {
+					return blacklisted, responses, err
+				}
+			}
+		}
 		blacklisted = true
 	}
 
